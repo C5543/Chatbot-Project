@@ -1,4 +1,3 @@
-#feat: simple chatbot streamlit app
 from openai import OpenAI
 import streamlit as st
 import os 
