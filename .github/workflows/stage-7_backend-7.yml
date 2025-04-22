@@ -76,16 +76,13 @@ jobs:
       - name: Set Application Settings
         run: |
           az functionapp config appsettings set --name Backend-7 --resource-group stage-7 --settings "FUNCTIONS_WORKER_RUNTIME=python" "KEY_VAULT_NAME=keyvaultmilestone" "APPINSIGHTS_INSTRUMENTATIONKEY=azurerm_application_insights.ai.instrumentation_key"
+      
       - name: 'Deploy to Azure Functions'
         uses: Azure/functions-action@v1
         id: deploy-to-function
         with:
-         app-name: 'Backend-7'
+          app-name: 'Backend-7'
           slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           scm-do-build-during-deployment: true
           enable-oryx-build: true
-          app-name: 'Backend-7'
-          slot-name: 'Production'
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          
