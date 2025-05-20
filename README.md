@@ -1,4 +1,5 @@
-#🤖 RAG Chatbot Project
+# RAG Chatbot Project 🤖
+
 A full-stack Retrieval-Augmented Generation (RAG) chatbot built with FastAPI, Streamlit, and ChromaDB, and deployed on Microsoft Azure using Terraform and CI/CD pipelines via GitHub Actions.
 
 📌 Project Overview
