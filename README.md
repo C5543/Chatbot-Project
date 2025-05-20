@@ -13,7 +13,7 @@ Containerized Deployment
 
 The chatbot integrates retrieval-based search with generative AI, enabling users to ask questions about uploaded PDF documents with accurate and context-rich answers.
 
-#🎯 Objectives
+🎯 Objectives
 Develop and test the chatbot locally.
 
 Deploy the application on Azure using:
@@ -28,7 +28,7 @@ Automate infrastructure provisioning using Terraform.
 
 Build CI/CD pipelines using GitHub Actions.
 
-#🏗️ Project Stages & Milestones
+🏗️ Project Stages & Milestones
 🔹 Local Development (Stage 1–4)
 Build a basic Streamlit chatbot.
 
@@ -67,7 +67,7 @@ Store container images in Azure Container Registry.
 
 Finalize with CI/CD pipeline for automatic container updates.
 
-#🛠️ Tech Stack
+🛠️ Tech Stack
 Layer	Technology
 Frontend	Streamlit
 Backend	FastAPI
