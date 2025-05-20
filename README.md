@@ -110,7 +110,7 @@ uvicorn main:app --reload
 cd ../frontend
 streamlit run app.py
 ```
-
+🔐 Environment Variables
 ``` makefile
 POSTGRES_URL=
 CHROMADB_PATH=
