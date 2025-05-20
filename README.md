@@ -120,3 +120,6 @@ OPENAI_API_KEY=
 ```
 🎓 Acknowledgments
 This project was developed as part of my journey with the Saudi Digital Academy, powered by WeCloudData.
+
+![Chatbot Architecture](https://github.com/C5543/Chatbot-Project/blob/main/chatbot.png?raw=true)
+
