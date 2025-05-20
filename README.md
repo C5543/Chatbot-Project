@@ -61,6 +61,8 @@ Automate deployment via GitHub Actions.
 🔹 Milestone 3: Containerized Deployment (Stage 10)
 Dockerize FastAPI backend.
 
+![Stage 10 Deployment](https://github.com/C5543/Chatbot-Project/blob/main/week7-stage10.png?raw=true)
+
 Deploy to Azure Container Apps.
 
 Store container images in Azure Container Registry.
