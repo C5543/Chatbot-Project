@@ -90,10 +90,11 @@ Chatbot-Project/
 ├── pdfs/                # Sample PDFs for testing
 ├── requirements.txt     
 └── README.md
+
+
 🚀 How to Run Locally
-bash
 
-
+``` bash
 # Clone the repository
 git clone https://github.com/C5543/Chatbot-Project.git
 cd Chatbot-Project
@@ -108,15 +109,14 @@ uvicorn main:app --reload
 # Start frontend
 cd ../frontend
 streamlit run app.py
-🔐 Environment Variables
-Make sure to set your environment variables in a .env file for local testing:
+```
 
-makefile
-
+``` makefile
 POSTGRES_URL=
 CHROMADB_PATH=
 AZURE_STORAGE_KEY=
 AZURE_COSMOS_KEY=
 OPENAI_API_KEY=
+```
 🎓 Acknowledgments
 This project was developed as part of my journey with the Saudi Digital Academy, powered by WeCloudData.
