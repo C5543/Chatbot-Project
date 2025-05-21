@@ -1,72 +1,107 @@
-# SDA-bootcamp-project
+# RAG Chatbot Project 🤖
 
-Stage 6 - **RAG** Chatbot with Chat history **(Dockerization)**
+A full-stack Retrieval-Augmented Generation (RAG) chatbot built with FastAPI, Streamlit, and ChromaDB, and deployed on Microsoft Azure using Terraform and CI/CD pipelines via GitHub Actions.
 
-A RAG chatbot using streamlit and FastAPI. At this stage we will add the RAG function to the bot.
-At this stage, we will dockerize our backend codes into a docker image and deploy it on the Azure Container App.
-The functionality of the codes is same as the codes we were using in stage 8, which store the chat history in the CosmosDB.
+📌 Project Overview  
+This project aims to explore three deployment architectures on Azure for a production-ready AI chatbot:
 
+Server-based Deployment  
+Serverless Deployment  
+Containerized Deployment  
 
-For the database, we can still use the `advanced_chats_new` table(the table we used in stage 8):
+The chatbot integrates retrieval-based search with generative AI, enabling users to ask questions about uploaded PDF documents with accurate and context-rich answers.
+
+🎯 Objectives  
+Develop and test the chatbot locally.
+
+Deploy the application on Azure using:
+
+- Virtual Machines (VM/VMSS)  
+- Azure Functions (Serverless)  
+- Azure Container Apps (Containerized)  
+
+Automate infrastructure provisioning using Terraform.  
+Build CI/CD pipelines using GitHub Actions.
+
+🏗️ Project Stages & Milestones  
+🔹 Local Development (Stage 1–4)  
+Build a basic Streamlit chatbot.  
+Separate frontend (Streamlit) and backend (FastAPI).  
+Connect to a database and implement chat history.  
+Add RAG functionality using PDF documents.
+
+🔹 Milestone 1: Server-based Deployment (Stage 5–6.6)  
+Manually deploy app on Azure VMs.  
+Add Azure PostgreSQL, Blob Storage, and Key Vault.  
+Transition to Terraform-based infrastructure.  
+Set up CI/CD pipelines for automatic VM deployment.  
+Finalize staging and production environments using VMSS and App Gateway.
+
+🔹 Milestone 2: Serverless Deployment (Stage 7–9)  
+Migrate backend from FastAPI to Azure Functions.  
+Store chat history in CosmosDB.  
+Use Azure Function Bindings to process files.  
+Automate deployment via GitHub Actions.
+
+🔹 Milestone 3: Containerized Deployment (Stage 10)  
+Dockerize FastAPI backend.
+
+<img src="https://github.com/user-attachments/assets/7df8ed06-ded5-4e84-bf0f-e9d3d31f0905" width="400" />
+
+Deploy to Azure Container Apps.  
+Store container images in Azure Container Registry.  
+Finalize with CI/CD pipeline for automatic container updates.
+
+🛠️ Tech Stack  
+| Layer        | Technology          |  
+|--------------|---------------------|  
+| Frontend     | Streamlit           |  
+| Backend      | FastAPI             |  
+| Vector DB    | ChromaDB            |  
+| File Storage | Azure Blob Storage  |  
+| Metadata DB  | Azure PostgreSQL     |  
+| History DB   | Azure Cosmos DB      |  
+| Secrets Mgmt | Azure Key Vault      |  
+| DevOps      | Terraform, GitHub Actions |  
+| Deployment  | VM / Azure Function / ACA |  
+
+📦 Repository Structure  
+```graphql
+Chatbot-Project/
+├── backend/             # FastAPI code
+├── frontend/            # Streamlit app
+├── terraform/           # Terraform modules and configs
+├── workflows/           # GitHub Actions CI/CD
+├── pdfs/                # Sample PDFs for testing
+├── requirements.txt     
+└── README.md
+
+🚀 How to Run Locally
 ```
-CREATE TABLE IF NOT EXISTS advanced_chats_new (
-    id TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
-    -- file_path TEXT NOT null,
-    last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    pdf_path TEXT,
-    pdf_name TEXT,
-    pdf_uuid TEXT
-)
+# Clone the repository
+git clone https://github.com/C5543/Chatbot-Project.git
+cd Chatbot-Project
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Start backend
+cd backend
+uvicorn main:app --reload
+
+# Start frontend
+cd ../frontend
+streamlit run app.py
 ```
 
-> **Note:** The codes in this branch is just the showcase that how to interact with CosmosDB, so we **only** store the chat history to the CosmosDB. Actually students can upload all the metadata to the CosmosDB to replace the PostgreSQL. In that case, we also make the database fully serverless.
-
-Since we need to add the CosmosDB connection in the Azure Function, we also need to store the `PROJ-COSMOSDB-ENDPOINT`, `PROJ-COSMOSDB-KEY`, `PROJ-COSMOSDB-DATABASE`, `PROJ-COSMOSDB-CONTAINER` in the **Azure Key Vault**.
-
-
-And since the front-end is still running on the instance and it needs to connect to the Azure Function APP, so let's store the Function URL in the Azure KeyVault as well.
-In this case, to allow the front-end able to load the URL from secret, we need to update the front-end codes a little bit and store the `KEY_VAULT_NAME` in the `.env` file on the instance where we run the front-end.
-Please make sure your instance has the permission to load the secret from the KeyVault.
-
-**For the backend, since we will deploy it to the Azure Container App, so we need to set the `KEY_VAULT_NAME` when creating the Azure Container APP. Don't forget to give you Azure Container APP permission to access the Azure Key Vault.**
-
-**And since the front-end codes will connect to the Azure Container APP, we need to store the `PROJ-AZURE-CONTAINER-APP-URL` in the Azure Key Vault as well**
-
-Now, the following secrets should be created in your Azure KeyVault:
-
+🔐 Environment Variables
 ```
-PROJ-DB-NAME
-PROJ-DB-USER
-PROJ-DB-PASSWORD
-PROJ-DB-HOST
-PROJ-DB-PORT
-PROJ-OPENAI-API-KEY
-PROJ-AZURE-STORAGE-SAS-URL
-PROJ-AZURE-STORAGE-CONTAINER
-PROJ-CHROMADB-HOST
-PROJ-CHROMADB-PORT
-PROJ-COSMOSDB-ENDPOINT
-PROJ-COSMOSDB-KEY
-PROJ-COSMOSDB-DATABASE
-PROJ-COSMOSDB-CONTAINER
-PROJ-AZURE-CONTAINER-APP-URL
+POSTGRES_URL=
+CHROMADB_PATH=
+AZURE_STORAGE_KEY=
+AZURE_COSMOS_KEY=
+OPENAI_API_KEY=
 ```
-
-PROJ-AZURE-CONTAINER-APP-URL is like `https://dev-aca-sp2.greendune-b96b6884.eastus2.azurecontainerapps.io`
-
-All the requirements for the Docker image are in the `requirements.txt`
-
-All the requirements for the VM are in the `requirements.vm.txt`
-
-To use RAG, we need to start the chromaDB fisrt, using the follow command to start the Chroma server:
-```
-chroma run --host 0.0.0.0 --path /db_path
-```
-change `/db_path` to the path you want to store the data, for example: `chromadb`.
-
-And then use 
-```
-streamlit run chatbot.py
-```
-to run the streamlit app.
+🎓 Acknowledgments
+This project was developed as part of my journey with the Saudi Digital Academy, powered by WeCloudData.
+<img src="https://github.com/user-attachments/assets/41ac8274-c361-4c2c-8fc8-7746c00b5823" width="400" /> 
