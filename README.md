@@ -61,7 +61,8 @@ Automate deployment via GitHub Actions.
 🔹 Milestone 3: Containerized Deployment (Stage 10)
 Dockerize FastAPI backend.
 
-![Stage 10 Deployment](https://github.com/C5543/Chatbot-Project/blob/main/week7-stage10.png?raw=true)
+<img src="https://github.com/user-attachments/assets/7df8ed06-ded5-4e84-bf0f-e9d3d31f0905" width="400" />
+
 
 Deploy to Azure Container Apps.
 
@@ -123,5 +124,6 @@ OPENAI_API_KEY=
 🎓 Acknowledgments
 This project was developed as part of my journey with the Saudi Digital Academy, powered by WeCloudData.
 
-![Chatbot Architecture](https://github.com/C5543/Chatbot-Project/blob/main/chatbot.png?raw=true)
+<img src="https://github.com/user-attachments/assets/41ac8274-c361-4c2c-8fc8-7746c00b5823" width="400" />
+
 
